@@ -13,6 +13,20 @@ void main() {
   }
 
   Fruta fruta01 = Fruta(nome, peso, cor, sabor, diasDesdeColheita);
+
+  Legumes madioca1 = Legumes('Macaxeira', 1200, 'Marrom', true);
+
+  Fruta banna1 = Fruta('Banana', 75, 'Amarela', 'Doce', 12);
+
+  Nozes macadamia = Nozes('Macadâmia', 2, 'Branco Amarelado', 'Doce', 20  , 35);
+
+  Citricas  limao1 = Citricas('Limão', 100, 'Verde', 'Azedo', 5, 9);
+
+// Chamando a Função printAlimento da classe Alimento, aqui estamos usando os metedos da class passando paramentros para elas.
+  madioca1.conzinha();
+  banna1.printAlimento();
+  macadamia.printAlimento();
+  limao1.fazerSuco();
 }
 
 // fazendo a hereça, fruta é herença de Alimentos.
@@ -29,15 +43,14 @@ class Fruta extends Alimento {
 
 // Metedos
   void estaMaduda(int diasParaMadura) {
-
     isMadura = diasDesdeColheita >= diasParaMadura;
     print(
         "A sua $nome foi colhida a $diasDesdeColheita dias, e precisa de $diasParaMadura para comer! Ela está madura? $isMadura ");
   }
-  
-  void fazerSuco(){
-  print('voce fez um ótimo suco de $nome');
-}
+
+  void fazerSuco() {
+    print('voce fez um ótimo suco de $nome');
+  }
 }
 
 //  Aqui eu tenho varias class que repete os atributos
@@ -70,26 +83,36 @@ class Legumes extends Alimento {
   }
 }
 
-class Citricas {
-  String nome;
-  double peso;
-  String cor;
-  int diasDesdeColheita;
-  bool? isMadura;
+class Citricas extends Fruta {
+  // String nome;
+  // double peso;
+  // String cor;
+  // int diasDesdeColheita;
+  // bool? isMadura;
   double nivelAzeo;
 
-  Citricas(this.nome, this.peso, this.cor, this.diasDesdeColheita,
-      this.isMadura, this.nivelAzeo);
+  Citricas(String nome, double peso, String cor, String sabor,
+      int diasDesdeColheita, this.nivelAzeo)
+      : super(nome, peso, cor, sabor, diasDesdeColheita);
+
+  void existeRefri(bool existe) {
+    if (existe) {
+      print('Existe Refrigerante de $nome');
+    } else {
+      print('Não exisre refri de $nome');
+    }
+  }
 }
 
-class Nozes {
-  String nome;
-  double peso;
-  String cor;
-  int diasDesdeColheita;
-  bool isMadura;
+class Nozes extends Fruta {
+  // String nome;
+  // double peso;
+  // String cor;
+  // int diasDesdeColheita;
+  // bool isMadura;
   double porcetagemOleNatural;
 
-  Nozes(this.nome, this.peso, this.cor, this.diasDesdeColheita, this.isMadura,
-      this.porcetagemOleNatural);
+  Nozes(String nome, double peso, String cor, String sabor,
+      int diasDesdeColheita, this.porcetagemOleNatural)
+      : super(nome, peso, cor, sabor, diasDesdeColheita);
 }
