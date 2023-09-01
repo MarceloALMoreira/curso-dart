@@ -18,19 +18,22 @@ void main() {
 
   Fruta banna1 = Fruta('Banana', 75, 'Amarela', 'Doce', 12);
 
-  Nozes macadamia = Nozes('Macadâmia', 2, 'Branco Amarelado', 'Doce', 20  , 35);
+  Nozes macadamia = Nozes('Macadâmia', 2, 'Branco Amarelado', 'Doce', 20, 35);
 
-  Citricas  limao1 = Citricas('Limão', 100, 'Verde', 'Azedo', 5, 9);
+  Citricas limao1 = Citricas('Limão', 100, 'Verde', 'Azedo', 5, 9);
 
 // Chamando a Função printAlimento da classe Alimento, aqui estamos usando os metedos da class passando paramentros para elas.
   madioca1.conzinha();
   banna1.printAlimento();
   macadamia.printAlimento();
   limao1.fazerSuco();
+
+  banna1.separarIngredientes();
+  macadamia.fazerMassa();
 }
 
 // fazendo a hereça, fruta é herença de Alimentos.
-class Fruta extends Alimento {
+class Fruta extends Alimento implements Bolo {
   // Propriedade da class
   String sabor;
   int diasDesdeColheita;
@@ -51,6 +54,25 @@ class Fruta extends Alimento {
   void fazerSuco() {
     print('voce fez um ótimo suco de $nome');
   }
+
+  @override
+  void separarIngredientes() {
+    // TODO: implement separarIngredientes
+
+    print('Pegar as frutas $nome');
+  }
+
+  @override
+  void fazerMassa() {
+    // TODO: implement fazerMassa
+    print('Misturar toda as frutas depois de batida');
+  }
+
+  @override
+  void assar() {
+    // TODO: implement assar
+    print('Colocar no forno');
+  }
 }
 
 //  Aqui eu tenho varias class que repete os atributos
@@ -66,7 +88,7 @@ class Alimento {
   }
 }
 
-class Legumes extends Alimento {
+class Legumes extends Alimento implements Bolo {
   bool isPrecisaCozinhar;
 
   Legumes(String nome, double peso, String cor, this.isPrecisaCozinhar)
@@ -80,6 +102,25 @@ class Legumes extends Alimento {
     } else {
       print('Nem precisa conzinha!');
     }
+  }
+
+  @override
+  void separarIngredientes() {
+    // TODO: implement separarIngredientes
+
+    print('Pegar as frutas');
+  }
+
+  @override
+  void fazerMassa() {
+    // TODO: implement fazerMassa
+    print('Misturar toda as frutas depois de batida');
+  }
+
+  @override
+  void assar() {
+    // TODO: implement assar
+    print('Colocar no forno');
   }
 }
 
@@ -115,4 +156,33 @@ class Nozes extends Fruta {
   Nozes(String nome, double peso, String cor, String sabor,
       int diasDesdeColheita, this.porcetagemOleNatural)
       : super(nome, peso, cor, sabor, diasDesdeColheita);
+
+  // Aqui eu vou adicionar mais um passo na função fazerMassa e em seguida chamar ela novamente.
+  // essa função está dentro da class abstract bolo. que implmentamos na class fruta
+
+  @override //a função que eu acessar com override ele
+  void fazerMassa() {
+    if (nome == nome && nome == '') {
+      print('a $nome precisa ser ');
+    } else {
+      print('a $nome precisa ser descascada');
+    }
+    super.fazerMassa();
+  }
+}
+
+// classes Abstratas
+
+// tudo que é conceitual é abstrato  &&
+abstract class Bolo {
+  // criando os metedos da class Abstrata
+
+  // 1º Separar os ingredientes
+  void separarIngredientes();
+
+  // 2º fazer a massa
+  void fazerMassa();
+
+  //  3º Colocar para assar
+  void assar();
 }
